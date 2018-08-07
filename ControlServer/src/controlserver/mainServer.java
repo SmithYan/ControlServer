@@ -5,17 +5,35 @@
  */
 package controlserver;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JTextArea;
+
 /**
  * 服务器端控制
  * @author wy521
  */
 public class mainServer extends javax.swing.JFrame {
+     JDesktopPane desktopPane;
     private static final long serialVersionUID = 1L;
     /**
      * Creates new form mainServer
      */
     public mainServer() {
         initComponents();
+        //声明容器指向this.getContentPane()
+         Container contentPane = this.getContentPane();
+         //设置容器中的排列方式
+        contentPane.setLayout(new BorderLayout());
+        /*建立一个新的JDesktopPane并加入于contentPane中
+         */
+        desktopPane = new JDesktopPane(); 
+        contentPane.add(desktopPane);
     }
 
     /**
@@ -31,14 +49,10 @@ public class mainServer extends javax.swing.JFrame {
         jMenuBar = new javax.swing.JMenuBar();
         jMenuConnect = new javax.swing.JMenu();
         jMenuItemConnectAll = new javax.swing.JMenuItem();
+        jMenuItemConnectOne = new javax.swing.JMenuItem();
         jMenuItemConnectSome = new javax.swing.JMenuItem();
         jMenuItemSaveIPAndPort = new javax.swing.JMenuItem();
-        jMenuNewJFrame = new javax.swing.JMenu();
-        jMenuItemJFrameAll = new javax.swing.JMenuItem();
-        jMenuItemJFrameOne = new javax.swing.JMenuItem();
-        jMenuItemJFrameSome = new javax.swing.JMenuItem();
         jMenuCloseJFrame = new javax.swing.JMenu();
-        jMenuItemCloseAll = new javax.swing.JMenuItem();
         jMenuItemCloseSome = new javax.swing.JMenuItem();
         jMenuItemExit = new javax.swing.JMenuItem();
         jMenuJFrameHelp = new javax.swing.JMenu();
@@ -56,10 +70,24 @@ public class mainServer extends javax.swing.JFrame {
 
         jMenuItemConnectAll.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemConnectAll.setText("连接所有客户端");
+        jMenuItemConnectAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConnectAllActionPerformed(evt);
+            }
+        });
         jMenuConnect.add(jMenuItemConnectAll);
 
-        jMenuItemConnectSome.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemConnectSome.setText("连接单个或多个客户端");
+        jMenuItemConnectOne.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemConnectOne.setText("连接单个客户端");
+        jMenuItemConnectOne.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConnectOneActionPerformed(evt);
+            }
+        });
+        jMenuConnect.add(jMenuItemConnectOne);
+
+        jMenuItemConnectSome.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItemConnectSome.setText("连接多个客户端");
         jMenuConnect.add(jMenuItemConnectSome);
 
         jMenuItemSaveIPAndPort.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
@@ -68,27 +96,7 @@ public class mainServer extends javax.swing.JFrame {
 
         jMenuBar.add(jMenuConnect);
 
-        jMenuNewJFrame.setText("新建");
-
-        jMenuItemJFrameAll.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.ALT_MASK));
-        jMenuItemJFrameAll.setText("打开所有客户端控制窗口");
-        jMenuNewJFrame.add(jMenuItemJFrameAll);
-
-        jMenuItemJFrameOne.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.SHIFT_MASK));
-        jMenuItemJFrameOne.setText("打开单个客户端控制窗口");
-        jMenuNewJFrame.add(jMenuItemJFrameOne);
-
-        jMenuItemJFrameSome.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemJFrameSome.setText("打开一组客户端控制窗口");
-        jMenuNewJFrame.add(jMenuItemJFrameSome);
-
-        jMenuBar.add(jMenuNewJFrame);
-
         jMenuCloseJFrame.setText("关闭");
-
-        jMenuItemCloseAll.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemCloseAll.setText("关闭所有客户端");
-        jMenuCloseJFrame.add(jMenuItemCloseAll);
 
         jMenuItemCloseSome.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemCloseSome.setText("关闭单个或多个客户端");
@@ -127,6 +135,15 @@ public class mainServer extends javax.swing.JFrame {
     private void jMenuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItemExitActionPerformed
+
+    private void jMenuItemConnectOneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConnectOneActionPerformed
+     JInternalFrameSubformTemplate jfst=new JInternalFrameSubformTemplate("单个客户端",desktopPane);
+     jfst.setVisible(true);
+    }//GEN-LAST:event_jMenuItemConnectOneActionPerformed
+
+    private void jMenuItemConnectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConnectAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemConnectAllActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,16 +185,12 @@ public class mainServer extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCloseJFrame;
     private javax.swing.JMenu jMenuConnect;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItemCloseAll;
     private javax.swing.JMenuItem jMenuItemCloseSome;
     private javax.swing.JMenuItem jMenuItemConnectAll;
+    private javax.swing.JMenuItem jMenuItemConnectOne;
     private javax.swing.JMenuItem jMenuItemConnectSome;
     private javax.swing.JMenuItem jMenuItemExit;
-    private javax.swing.JMenuItem jMenuItemJFrameAll;
-    private javax.swing.JMenuItem jMenuItemJFrameOne;
-    private javax.swing.JMenuItem jMenuItemJFrameSome;
     private javax.swing.JMenuItem jMenuItemSaveIPAndPort;
     private javax.swing.JMenu jMenuJFrameHelp;
-    private javax.swing.JMenu jMenuNewJFrame;
     // End of variables declaration//GEN-END:variables
 }
