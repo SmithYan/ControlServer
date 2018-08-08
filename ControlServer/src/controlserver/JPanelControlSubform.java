@@ -11,12 +11,12 @@ import javax.swing.DefaultButtonModel;
  *
  * @author wy521
  */
-public class JPanelSubformTemplate extends javax.swing.JPanel {
+public class JPanelControlSubform extends javax.swing.JPanel {
 
     /**
      * Creates new form JPanelSubformTemplate
      */
-    public JPanelSubformTemplate() {
+    public JPanelControlSubform() {
         initComponents();
         init();
     }

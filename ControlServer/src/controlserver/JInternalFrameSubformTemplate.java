@@ -20,7 +20,7 @@ public class JInternalFrameSubformTemplate extends JInternalFrame {
         JInternalFrame internalFrame = new JInternalFrame(title, true, true, true, true);
         internalFrame.setSize(400, 400);
         internalFrame.setVisible(true);
-        JPanelSubformTemplate jpst = new JPanelSubformTemplate();
+        JPanelControlSubform jpst = new JPanelControlSubform();
         jpst.setLocation(0, 0);
         jpst.setSize(400, 400);
         jpst.setVisible(true);

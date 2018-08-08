@@ -5,17 +5,57 @@
  */
 package connectclient;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  *
  * @author wy521
  */
 public class mainClient extends javax.swing.JFrame {
 
+    ClientOperate co;
+
     /**
      * Creates new form mainClient
+     * @throws java.io.IOException 可能会抛出的异常
      */
-    public mainClient() {
+    public mainClient() throws IOException {
         initComponents();
+        propertiesSetting();
+    }
+
+    private void propertiesSetting() {
+        this.jTextArea.setEditable(false);
+        this.jButtonSend.setEnabled(false);
+        this.jMenuConnect.setEnabled(false);
+        this.jTextFieldText.setEnabled(false);
+        this.jTextArea.setEnabled(false);
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                try {
+                    if (co != null) {
+                        jTextFieldText.setText("服务端尚未打开，请联系相关人员");
+                        co = new ClientOperate();
+                    }else  {
+                        receive();s
+                    }
+                } catch (IOException ex) {
+                }
+            }
+        }, new Date(), 100);
+        if (co != null) {
+            jTextFieldText.setText("");
+            jButtonSend.setEnabled(true);
+            jMenuConnect.setEnabled(true);
+            jTextFieldText.setEnabled(true);
+            jTextArea.setEnabled(true);
+        }
     }
 
     /**
@@ -30,7 +70,7 @@ public class mainClient extends javax.swing.JFrame {
         jButtonSend = new javax.swing.JButton();
         jTextFieldText = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextArea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuConnect = new javax.swing.JMenu();
         jMenuExit = new javax.swing.JMenu();
@@ -38,10 +78,15 @@ public class mainClient extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonSend.setText("发送");
+        jButtonSend.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSendActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextArea.setColumns(20);
+        jTextArea.setRows(5);
+        jScrollPane1.setViewportView(jTextArea);
 
         jMenuConnect.setText("连接");
         jMenuConnect.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -70,8 +115,8 @@ public class mainClient extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextFieldText)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jButtonSend)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonSend, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -90,13 +135,26 @@ public class mainClient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuConnectMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuConnectMousePressed
-       
+        try {
+            co.sendToServer("请求对话");
+        } catch (IOException ex) {
+        }
     }//GEN-LAST:event_jMenuConnectMousePressed
 
     private void jMenuExitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuExitMousePressed
-        System.exit(0);
+        this.setVisible(false);
     }//GEN-LAST:event_jMenuExitMousePressed
 
+    private void jButtonSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendActionPerformed
+        try {
+            co.sendToServer(this.jTextFieldText.getText());
+            this.jTextArea.setText("客户端 <<"+this.jTextFieldText+"\n");
+        } catch (IOException ex) {
+        }
+    }//GEN-LAST:event_jButtonSendActionPerformed
+private void receive() throws IOException{
+    this.jTextArea.setText("服务端  >>"+co.receiveFromServer()+"\n");
+}
     /**
      * @param args the command line arguments
      */
@@ -127,7 +185,10 @@ public class mainClient extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new mainClient().setVisible(true);
+                try {
+                    new mainClient().setVisible(true);
+                } catch (IOException ex) {
+                }
             }
         });
     }
@@ -138,7 +199,7 @@ public class mainClient extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuConnect;
     private javax.swing.JMenu jMenuExit;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea;
     private javax.swing.JTextField jTextFieldText;
     // End of variables declaration//GEN-END:variables
 }

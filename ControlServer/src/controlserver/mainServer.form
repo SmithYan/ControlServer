@@ -31,23 +31,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemConnectAllActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemConnectOne">
-              <Properties>
-                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+O"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="&#x8fde;&#x63a5;&#x5355;&#x4e2a;&#x5ba2;&#x6237;&#x7aef;"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemConnectOneActionPerformed"/>
-              </Events>
-            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemConnectSome">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
-                  <KeyStroke key="Alt+S"/>
+                  <KeyStroke key="Alt+M"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&#x8fde;&#x63a5;&#x591a;&#x4e2a;&#x5ba2;&#x6237;&#x7aef;"/>
+                <Property name="text" type="java.lang.String" value="&#x8fde;&#x63a5;&#x5355;&#x4e2a;&#x6216;&#x591a;&#x4e2a;&#x5ba2;&#x6237;&#x7aef;"/>
               </Properties>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSaveIPAndPort">
@@ -60,11 +49,50 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuNewJFrame">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x65b0;&#x5efa;"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemJFrameAll">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Alt+O"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#x6253;&#x5f00;&#x6240;&#x6709;&#x5ba2;&#x6237;&#x7aef;&#x63a7;&#x5236;&#x7a97;&#x53e3;"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemJFrameOne">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Shift+O"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#x6253;&#x5f00;&#x5355;&#x4e2a;&#x5ba2;&#x6237;&#x7aef;&#x63a7;&#x5236;&#x7a97;&#x53e3;"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemJFrameSome">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+O"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#x6253;&#x5f00;&#x4e00;&#x7ec4;&#x5ba2;&#x6237;&#x7aef;&#x63a7;&#x5236;&#x7a97;&#x53e3;"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuCloseJFrame">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x5173;&#x95ed;"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCloseAll">
+              <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+C"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#x5173;&#x95ed;&#x6240;&#x6709;&#x5ba2;&#x6237;&#x7aef;"/>
+              </Properties>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCloseSome">
               <Properties>
                 <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">

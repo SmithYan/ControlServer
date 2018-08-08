@@ -52,8 +52,8 @@
                   <Component id="jTextFieldText" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" pref="411" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="63" max="32767" attributes="0"/>
-              <Component id="jButtonSend" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jButtonSend" pref="108" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -78,6 +78,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x53d1;&#x9001;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSendActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldText">
     </Component>
@@ -88,7 +91,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="jTextArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
