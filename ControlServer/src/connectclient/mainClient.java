@@ -43,7 +43,7 @@ public class mainClient extends javax.swing.JFrame {
                         jTextFieldText.setText("服务端尚未打开，请联系相关人员");
                         co = new ClientOperate();
                     }else  {
-                        receive();s
+                        receive();
                     }
                 } catch (IOException ex) {
                 }
