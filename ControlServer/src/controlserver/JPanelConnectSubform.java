@@ -5,17 +5,35 @@
  */
 package controlserver;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Properties;
+import javafx.scene.layout.Border;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.border.EmptyBorder;
+
 /**
+ * 
  *
  * @author wy521
  */
 public class JPanelConnectSubform extends javax.swing.JPanel {
-
+    JCheckBox[] jcbs=new JCheckBox[20];
     /**
      * Creates new form JPanelConnectSubform
      */
     public JPanelConnectSubform() {
         initComponents();
+
+    }
+
+    private void init() {
+        
     }
 
     /**
@@ -28,23 +46,39 @@ public class JPanelConnectSubform extends javax.swing.JPanel {
     private void initComponents() {
 
         jCheckBoxAll = new javax.swing.JCheckBox();
-        jPanelCheckBoxCollection = new javax.swing.JPanel();
+        jButtonConnect = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabelShowConnect = new javax.swing.JLabel();
+        jScrollPane = new javax.swing.JScrollPane();
+        jPanelCheckBoxCollection = new javax.swing.JPanel();
 
         jCheckBoxAll.setText("全选");
+        jCheckBoxAll.setToolTipText("");
+
+        jButtonConnect.setText("连接为单个");
+
+        jButton1.setText("中断选中");
+
+        jButton2.setText("保存地址");
+
+        jButton3.setText("连接为一组");
+
+        jLabelShowConnect.setText("当前连接客户端");
 
         javax.swing.GroupLayout jPanelCheckBoxCollectionLayout = new javax.swing.GroupLayout(jPanelCheckBoxCollection);
         jPanelCheckBoxCollection.setLayout(jPanelCheckBoxCollectionLayout);
         jPanelCheckBoxCollectionLayout.setHorizontalGroup(
             jPanelCheckBoxCollectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 143, Short.MAX_VALUE)
+            .addGap(0, 226, Short.MAX_VALUE)
         );
         jPanelCheckBoxCollectionLayout.setVerticalGroup(
             jPanelCheckBoxCollectionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 230, Short.MAX_VALUE)
         );
 
-        jButton1.setText("jButton1");
+        jScrollPane.setViewportView(jPanelCheckBoxCollection);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -54,31 +88,52 @@ public class JPanelConnectSubform extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jCheckBoxAll)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanelCheckBoxCollection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(58, 58, 58))))
+                        .addComponent(jLabelShowConnect)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jCheckBoxAll)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(39, 39, 39)
+                .addComponent(jLabelShowConnect)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelCheckBoxCollection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonConnect)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCheckBoxAll)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonConnect;
     private javax.swing.JCheckBox jCheckBoxAll;
+    private javax.swing.JLabel jLabelShowConnect;
     private javax.swing.JPanel jPanelCheckBoxCollection;
+    private javax.swing.JScrollPane jScrollPane;
     // End of variables declaration//GEN-END:variables
 }

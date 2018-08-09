@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,11 +30,11 @@ public class mainClient extends javax.swing.JFrame {
     }
 
     private void propertiesSetting() {
-        this.jTextArea.setEditable(false);
+       /* this.jTextArea.setEditable(false);
         this.jButtonSend.setEnabled(false);
         this.jMenuConnect.setEnabled(false);
         this.jTextFieldText.setEnabled(false);
-        this.jTextArea.setEnabled(false);
+        this.jTextArea.setEnabled(false);*/
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
 
@@ -43,7 +45,7 @@ public class mainClient extends javax.swing.JFrame {
                         jTextFieldText.setText("服务端尚未打开，请联系相关人员");
                         co = new ClientOperate();
                     }else  {
-                        receive();
+                        //receive();
                     }
                 } catch (IOException ex) {
                 }
@@ -143,6 +145,11 @@ public class mainClient extends javax.swing.JFrame {
 
     private void jMenuExitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuExitMousePressed
         this.setVisible(false);
+        try {
+            co.close();
+        } catch (IOException ex) {
+            Logger.getLogger(mainClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuExitMousePressed
 
     private void jButtonSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSendActionPerformed

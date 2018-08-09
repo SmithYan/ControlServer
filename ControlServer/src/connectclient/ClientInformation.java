@@ -24,5 +24,5 @@ public class ClientInformation {
     /*
     * 即将用来访问的端口
      */
-    public static int Port =22222;
+    public static int Port =8888;
 }

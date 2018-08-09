@@ -8,6 +8,11 @@ package controlserver;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -16,23 +21,30 @@ import javax.swing.JTextArea;
 
 /**
  * 服务器端控制
+ *
  * @author wy521
  */
 public class mainServer extends javax.swing.JFrame {
-     JDesktopPane desktopPane;
+
+    JDesktopPane desktopPane;
+    ServerSocket[] ss = new ServerSocket[20];
+    ServerToOneClient stoc;
+    Socket socket;
+
     private static final long serialVersionUID = 1L;
+
     /**
      * Creates new form mainServer
      */
     public mainServer() {
         initComponents();
         //声明容器指向this.getContentPane()
-         Container contentPane = this.getContentPane();
-         //设置容器中的排列方式
+        Container contentPane = this.getContentPane();
+        //设置容器中的排列方式
         contentPane.setLayout(new BorderLayout());
         /*建立一个新的JDesktopPane并加入于contentPane中
          */
-        desktopPane = new JDesktopPane(); 
+        desktopPane = new JDesktopPane();
         contentPane.add(desktopPane);
     }
 
@@ -46,6 +58,9 @@ public class mainServer extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jButton1 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
         jMenuBar = new javax.swing.JMenuBar();
         jMenuConnect = new javax.swing.JMenu();
         jMenuItemConnectAll = new javax.swing.JMenuItem();
@@ -67,6 +82,20 @@ public class mainServer extends javax.swing.JFrame {
         setTitle("ServerControl");
         setSize(new java.awt.Dimension(1000, 618));
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         jMenuBar.setMinimumSize(new java.awt.Dimension(70, 40));
         jMenuBar.setName(""); // NOI18N
 
@@ -83,6 +112,11 @@ public class mainServer extends javax.swing.JFrame {
 
         jMenuItemConnectSome.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.ALT_MASK));
         jMenuItemConnectSome.setText("连接单个或多个客户端");
+        jMenuItemConnectSome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConnectSomeActionPerformed(evt);
+            }
+        });
         jMenuConnect.add(jMenuItemConnectSome);
 
         jMenuItemSaveIPAndPort.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
@@ -137,11 +171,26 @@ public class mainServer extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 782, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(67, 67, 67)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(jButton2)))
+                .addContainerGap(364, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 467, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,8 +201,45 @@ public class mainServer extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemExitActionPerformed
 
     private void jMenuItemConnectAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConnectAllActionPerformed
-        
+
     }//GEN-LAST:event_jMenuItemConnectAllActionPerformed
+
+    private void jMenuItemConnectSomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConnectSomeActionPerformed
+        JInternalFrameSubformTemplate j = new JInternalFrameSubformTemplate("连接客户端", desktopPane, true);
+        j.setVisible(true);
+    }//GEN-LAST:event_jMenuItemConnectSomeActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            ss[0] = new ServerSocket(8888);
+            while (true) {
+                socket = ss[0].accept();
+                try {
+                    stoc = new ServerToOneClient(socket);
+                    stoc.sendToClient("lianjiechenggong", socket);
+                } catch (IOException e) {
+                    ss[0].close();
+                }
+            }
+        } catch (IOException ex) {
+            try {
+                ss[0].close();
+            } catch (IOException ex1) {
+            }
+        } finally {
+            try {
+                ss[0].close();
+            } catch (IOException ex) {
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            stoc.sendToClient(this.jTextField1.getText(), socket);
+        } catch (IOException ex) {
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +277,8 @@ public class mainServer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JMenuBar jMenuBar;
     private javax.swing.JMenu jMenuCloseJFrame;
     private javax.swing.JMenu jMenuConnect;
@@ -206,5 +294,6 @@ public class mainServer extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemSaveIPAndPort;
     private javax.swing.JMenu jMenuJFrameHelp;
     private javax.swing.JMenu jMenuNewJFrame;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
